@@ -1,0 +1,64 @@
+SQL
+use zoro;
+desc employee;
+create table department(dno int,dname varchar(10),hod varchar(10),location char(10),strength int);
+desc department;
+create table student(regno int,name char(10),email char(10),phone int,branch varchar(10),tutor int,place varchar(10),cgpa decimal(4,2));
+desc student;
+insert into department values(303,'CJ','hera','CHE',200);
+insert into employee values(203,'hebi',20000,'broker','EKM',6317984,303);
+select * from student;
+select * from department;
+select * from employee;
+alter table employee modify salary int;
+
+//quicksort(lomuto partition)
+#include <stdio.h>
+void swap(int *a,int *b);
+int partition(int a[],int l,int p);
+void quicksort(int z[],int l,int p);
+int display(int z[],int e);
+void main()
+{
+    int a[10]={6,10,3,8,2},s=5;
+    quicksort(a,0,s-1);
+    display(a,s-1);
+}
+void swap(int *a,int *b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+int partition(int a[],int l,int p)
+{
+    for(l;l<p;l++)
+    {
+        while(a[l]>a[p])
+        {
+            swap(&a[l],&a[p-1]);
+            if(a[p-1]>a[p])
+            {
+                swap(&a[p-1],&a[p]);
+            }
+            p--;
+        }
+    }
+    return p;
+}
+int display(int z[],int e)
+{
+    int i=0;
+    while(i<=e)
+    {
+        printf("%d\t",*(z+i));
+        i++;
+    }
+}
+void quicksort(int z[],int l,int p)
+{
+    int pi=partition(z,l,p);
+    if(l>p) return ;
+    quicksort(z,l,pi-1);
+    quicksort(z,pi+1,p);
+}
