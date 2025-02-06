@@ -1,3 +1,5 @@
+#define MARKER "Marker"
+
 char stack[100];
 int size;
 int tos = -1;
@@ -11,7 +13,7 @@ void push(char item) {
 
 char pop() {
   if (isEmpty())
-    return '#';
+    return '\0';
   else {
       tos-=1;
     return stack[tos];

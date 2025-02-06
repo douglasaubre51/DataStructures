@@ -5,15 +5,17 @@
 #include "priority.h"
 
 int main() {
-  printf("enter a {POSTFIX} expression: ");
-  char postFix[100];
+  printf("enter a {INFIX} expression ending with #: ");
+  char postFix[101];
   scanf("%s", postFix);
 
   printf("{INFIX} expression:\a\n");
 
+  push('#');
+
   for (int i = 0; postFix[i] != '#'; i++) {
     if (isalnum(postFix[i])) {
-      push(postFix[i]);
+	printf("%c",postFix[i]);
     }
 
     else if (postFix[i] == '(') {
@@ -40,8 +42,10 @@ int main() {
 
 	push(postFix[i]);
     }
-  }
 
-  while(!isEmpty())
-      printf("%c",pop());
+
+  }
+    while(!isEmpty())
+      	printf("%c",pop());
+
 }
