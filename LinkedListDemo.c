@@ -14,11 +14,13 @@ bool isEmpty();
 void insertFront(int item);
 void traverse();
 void search();
+void insertEnd(int item);
 
 int main(){
-    printf("1:{Insert Front}\n");
-    printf("2:{traverse}\n");
-    printf("3:{search}\n");
+    printf("1:{INSERT FRONT}\n");
+    printf("2:{TRAVERSE}\n");
+    printf("3:{SEARCH}\n");
+    printf("4:{INSERT END}\n");
     printf("0:{EXIT}\n");
 
     while(true){
@@ -46,6 +48,12 @@ int main(){
 		    scanf("%d",&key);
 
 		    search(key);
+		    break;
+
+	    case 4: printf("enter a no: ");
+		    scanf("%d",&item);
+
+		    insertEnd(item);
 		    break;
 
 	    default:printf("enter only given numbers!\n");
@@ -117,5 +125,26 @@ void search(int key){
 	}
 
 	printf("key not found!\n");
+    }
+}
+
+void insertEnd(int item){
+    struct NodeStruct* ptr=head;
+
+    if(isEmpty())
+	insertFront(item);
+
+    else{
+	while(ptr!=NULL){
+	    if(ptr->link==NULL){
+		struct NodeStruct* baby=getNode(item);
+		ptr->link=baby;
+
+		return;
+	    }
+
+	    else
+		ptr=ptr->link;
+	}
     }
 }
