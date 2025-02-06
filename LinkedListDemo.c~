@@ -13,11 +13,13 @@ struct NodeStruct* getNode(int item);
 bool isEmpty();
 void insertFront(int item);
 void traverse();
+void search();
 
 int main(){
     printf("1:{Insert Front}\n");
     printf("2:{traverse}\n");
-    printf("3:{EXIT}\n");
+    printf("3:{search}\n");
+    printf("0:{EXIT}\n");
 
     while(true){
 	printf("choice: ");
@@ -25,8 +27,12 @@ int main(){
     	scanf("%d",&choice);
 
     	int item;
+	int key;
 
 	switch(choice){
+	    case 0: return 0;
+		    break;
+
 	    case 1: printf("enter a no: ");
 		    scanf("%d",&item);
 
@@ -36,8 +42,11 @@ int main(){
 	    case 2: traverse();
 		    break;
 
-	    case 3:return 0;
-		   break;
+	    case 3: printf("enter key to find: ");
+		    scanf("%d",&key);
+
+		    search(key);
+		    break;
 
 	    default:printf("enter only given numbers!\n");
 		    break;
@@ -87,5 +96,26 @@ void traverse(){
 
     else{
 	printf("empty list!\n");
+    }
+}
+
+void search(int key){
+    if(isEmpty())
+	printf("list empty!\n");
+
+    else{
+	struct NodeStruct* ptr=head;
+
+	while(ptr!=NULL){
+	    if(ptr->data==key){
+		printf("key found!\n");
+	    	return;
+	    }
+
+	    else
+		ptr=ptr->link;
+	}
+
+	printf("key not found!\n");
     }
 }
