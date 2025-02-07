@@ -16,6 +16,8 @@ void traverse();
 void search();
 void insertEnd(int item);
 void insertAfterAnyKey(int key,int item);
+int deleteFront();
+int deleteAnyKey(int key);
 
 int main(){
     printf("1:{INSERT FRONT}\n");
@@ -23,6 +25,8 @@ int main(){
     printf("3:{SEARCH}\n");
     printf("4:{INSERT END}\n");
     printf("5:{INSERT AFTER ANY KEY}\n");
+    printf("6:{DELETE FRONT}\n");
+    printf("7:{DELETE ANY KEY}\n");
     printf("0:{EXIT}\n");
 
     while(true){
@@ -32,6 +36,7 @@ int main(){
 
     	int item;
 	int key;
+	int result;
 
 	switch(choice){
 	    case 0: return 0;
@@ -65,6 +70,19 @@ int main(){
 		    scanf("%d",&item);
 
 		    insertAfterAnyKey(key,item);
+		    break;
+
+	    case 6: result=deleteFront();
+
+		    if(result!=-1)
+			printf("returns: %d\n",result);
+
+		    break;
+
+	    case 7: printf("enter a key: ");
+		    scanf("%d",&key);
+
+		    deleteAnyKey(key);
 		    break;
 
 	    default:printf("enter only given numbers!\n");
@@ -187,5 +205,60 @@ void insertAfterAnyKey(int key,int item){
 	
 	if(!flag)
 	    printf("key not found!\n");
+    }
+}
+
+int deleteFront(){
+    if(isEmpty()){
+	printf("empty list!\n");
+	return -1;
+    }
+
+    else{
+    	struct NodeStruct* ptr=head;
+
+	int data=ptr->data;
+	head=ptr->link;
+
+	free(ptr);
+
+	printf("node destroyed successfully!\n");
+	return data;
+    }
+}
+
+//delete any key is incomplete!
+int deleteAnyKey(int key){
+    if(isEmpty())
+	printf("empty list!\n");
+
+    else{
+	struct NodeStruct* ptr=head;
+	struct NodeStruct* prev;
+
+	bool flag=false;
+
+	while(ptr!=NULL){
+	    if(ptr->data==key){
+		prev->link=ptr->link;
+		int data=ptr->data;
+
+		flag=true;
+
+		free(ptr);
+		printf("node destroyed successfully!\n");
+		return data;
+	    }
+
+	    else{
+		ptr=ptr->link;
+		prev=ptr;
+	    }
+	}
+
+	if(!flag){
+	    printf("key not found!\n");
+	    return -1;
+	}
     }
 }
