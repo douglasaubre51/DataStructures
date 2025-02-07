@@ -15,12 +15,14 @@ void insertFront(int item);
 void traverse();
 void search();
 void insertEnd(int item);
+void insertAfterAnyKey(int key,int item);
 
 int main(){
     printf("1:{INSERT FRONT}\n");
     printf("2:{TRAVERSE}\n");
     printf("3:{SEARCH}\n");
     printf("4:{INSERT END}\n");
+    printf("5:{INSERT AFTER ANY KEY}\n");
     printf("0:{EXIT}\n");
 
     while(true){
@@ -54,6 +56,15 @@ int main(){
 		    scanf("%d",&item);
 
 		    insertEnd(item);
+		    break;
+
+	    case 5: printf("enter a key: ");
+		    scanf("%d",&key);
+
+		    printf("enter a no: ");
+		    scanf("%d",&item);
+
+		    insertAfterAnyKey(key,item);
 		    break;
 
 	    default:printf("enter only given numbers!\n");
@@ -140,11 +151,41 @@ void insertEnd(int item){
 		struct NodeStruct* baby=getNode(item);
 		ptr->link=baby;
 
+		printf("node created successfully!\n");
 		return;
 	    }
 
 	    else
 		ptr=ptr->link;
 	}
+    }
+}
+
+void insertAfterAnyKey(int key,int item){
+    if(isEmpty())
+	printf("empty list!\n");
+
+    else{
+	struct NodeStruct* ptr=head;
+	
+	bool flag=false;
+
+	while(ptr!=NULL){
+	    if(ptr->data==key){
+		struct NodeStruct* baby=getNode(item);
+		baby->link=ptr->link;
+		ptr->link=baby;
+
+		flag=true;
+		printf("node created successfully!\n");
+		return;
+	    }
+
+	    else
+		ptr=ptr->link;
+	}
+	
+	if(!flag)
+	    printf("key not found!\n");
     }
 }
