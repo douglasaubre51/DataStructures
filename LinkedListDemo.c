@@ -33,10 +33,10 @@ int main(){
 
     while(true){
 	printf("choice: ");
-    	int choice;
-    	scanf("%d",&choice);
+	int choice;
+	scanf("%d",&choice);
 
-    	int item;
+	int item;
 	int key;
 	int result;
 
@@ -118,9 +118,9 @@ bool isEmpty(){ return head==NULL ? true : false; }
 
 void insertFront(int item){
     if(isEmpty()){
-    	struct NodeStruct* baby=getNode(item);
-    	head=baby;
-	
+	struct NodeStruct* baby=getNode(item);
+	head=baby;
+
 	printf("node created successfully!\n");
     }
 
@@ -160,7 +160,7 @@ void search(int key){
 	while(ptr!=NULL){
 	    if(ptr->data==key){
 		printf("key found!\n");
-	    	return;
+		return;
 	    }
 
 	    else
@@ -199,7 +199,7 @@ void insertAfterAnyKey(int key,int item){
 
     else{
 	struct NodeStruct* ptr=head;
-	
+
 	bool flag=false;
 
 	while(ptr!=NULL){
@@ -216,7 +216,7 @@ void insertAfterAnyKey(int key,int item){
 	    else
 		ptr=ptr->link;
 	}
-	
+
 	if(!flag)
 	    printf("key not found!\n");
     }
@@ -229,11 +229,11 @@ int deleteFront(){
     }
 
     else{
-    	struct NodeStruct* ptr=head;
+	struct NodeStruct* ptr=head;
 
 	if(ptr->link==NULL){
 	    int data=ptr->data;
-	    
+
 	    head=NULL;
 	    free(ptr);
 
@@ -241,13 +241,13 @@ int deleteFront(){
 	}
 
 	else{
-		int data=ptr->data;
-		head=ptr->link;
+	    int data=ptr->data;
+	    head=ptr->link;
 
-		free(ptr);
+	    free(ptr);
 
-		printf("node destroyed successfully!\n");
-		return data;
+	    printf("node destroyed successfully!\n");
+	    return data;
 	}
     }
 }
@@ -260,21 +260,31 @@ int deleteAnyKey(int key){
 
     else{
 	struct NodeStruct* ptr=head;
-	struct NodeStruct* prev;
+	//added null value to prev for checking if the iteration first or not
+	struct NodeStruct* prev=NULL;
 
 	bool flag=false;
 
 	if(ptr->link==NULL){
 	    if(ptr->data==key){
-	    	int data=deleteFront();
-	    	flag=true;
+		int data=deleteFront();
+		flag=true;
 
-	    	return data;
+		return data;
 	    }
 	}
 
 	while(ptr!=NULL){
 	    if(ptr->data==key){
+		//added this of to check if the iteration is first or not
+		//if its first we need to call deletefront
+		if(prev==NULL){
+		    int data=deleteFront();
+		    flag=true;
+
+		    return data;
+		}
+
 		prev->link=ptr->link;
 		int data=ptr->data;
 
@@ -306,7 +316,7 @@ int deleteEnd(){
 
     else{
 	struct NodeStruct* ptr=head;
-	struct NodeStruct* prev;
+	struct NodeStruct* prev=NULL;
 
 	bool flag=false;
 
