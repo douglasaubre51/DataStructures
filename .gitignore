@@ -3,3 +3,5 @@ bs.exe
 *.c~
 *.swp
 *.un~
+*.un~
+*.exe
