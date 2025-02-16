@@ -32,6 +32,9 @@ int main(){
 	    case 0: printf("bye!\n\a");
 		    return 0;
 		    break;
+
+	    default: printf("enter only valid options!\a\n");
+		     break;
 	}
     }
 }
@@ -40,7 +43,8 @@ void enqueue(int item){
     insertEnd(item);
 }
 
+//changed deleteEnd to deleteFront since its queue (fifo)
 void dequeue(){
     int result;
-    (result=deleteEnd()) == -1 ? printf("") : printf("returns: %d\n",result);
+    (result=deleteFront()) == -1 ? printf("") : printf("returns: %d\n",result);
 }
