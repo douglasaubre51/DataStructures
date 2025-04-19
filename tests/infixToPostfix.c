@@ -1,3 +1,5 @@
+// wont work with paranthesis
+
 #include<stdio.h>
 #include<stdbool.h>
 #include<ctype.h>
@@ -8,6 +10,8 @@
 // show value
 void showValue(char ch){ (ch!='(') ? printf("%c",ch) : printf(""); }
 
+void err(char ch){ printf("\n%c\n",ch); }
+
 // builder
 void main(){
 
@@ -17,6 +21,7 @@ void main(){
     char infix[100];
     scanf("%s",infix);
 
+    push('#');
     // business logic
     for(int i = 0 ; infix[i] != '#' ; i++ ){
 
@@ -30,7 +35,7 @@ void main(){
 
 	    char ch=pop();
 	    while(priorityOf(infix[i]) <= priorityOf(ch)){
-
+		err(ch);
 		showValue(ch);
 		ch=pop();
 	    }
