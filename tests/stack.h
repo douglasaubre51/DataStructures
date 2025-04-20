@@ -1,9 +1,9 @@
 #include "linkedList.h"
 
 // stack func
-void push(char a){ insertEnd(a); }
+void push(int a){ insertEnd(a); }
 
-char pop(){ return deleteEnd(); }
+int pop(){ return deleteEnd(); }
 
 bool emptyStack(){ return isEmpty(); }
 

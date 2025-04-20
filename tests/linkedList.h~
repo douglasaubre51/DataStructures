@@ -2,6 +2,9 @@
 
 #define LIST struct LinkedList
 
+// display value
+void showValue(int item){ printf("%d\n",item); }
+
 // linked list empty
 void listEmpty(){ printf("list is empty!\n"); }
 
@@ -44,7 +47,7 @@ void insertFront(int item){
   }
 }
 
-void insertEnd(char item){
+void insertEnd(int item){
   if(isEmpty()){
     headPtr=createNode(item);
     return;
@@ -103,9 +106,9 @@ bool insertAfterAnyKey(int key,int item){
 }
 
 // delete
-char deleteFront(){
+int deleteFront(){
   if(isEmpty()){
-    return '\0';
+    return -1;
   }
 
   else{
@@ -113,7 +116,7 @@ char deleteFront(){
 
     if(ptr->link==NULL){
 
-      ch temp=ptr->data;
+      char temp=ptr->data;
 
       headPtr=NULL;
       free(ptr);
@@ -132,13 +135,20 @@ char deleteFront(){
   }
 }
 
-char deleteEnd(){
-  if(isEmpty()){ return '\0'; }
+int deleteEnd(){
+  if(isEmpty()){ return -1; }
 
   else{
     LIST* ptr=headPtr;
 
-    if(ptr->link==NULL){ return deleteFront(); }
+    if(ptr->link==NULL){ 
+
+      int temp=ptr->data;
+      headPtr=NULL;
+      free(ptr);
+
+      return temp;
+    }
 
     else{
       LIST* prevPtr=NULL;
@@ -146,7 +156,7 @@ char deleteEnd(){
       while(ptr!=NULL){
 	if(ptr->link==NULL){
 
-	  char temp=ptr->data;
+	  int temp=ptr->data;
 
 	  prevPtr->link=NULL;
 	  free(ptr);
@@ -215,35 +225,35 @@ int deleteAnyKey(int key){
 }
 
 // misc
-//void traverse(){
-//  if(isEmpty()){
-//    listEmpty();
-//    return;
-//  }
-//
-//  else if(headPtr->link==NULL){
-//    showValue(headPtr->data);
-//    return;
-//  }
-//
-//  else{
-//    LIST* ptr=headPtr;
-//
-//    while(ptr!=NULL){
-//      if(ptr->link==NULL){
-//	showValue(ptr->data);
-//
-//	return;
-//      }
-//
-//      else{
-//	showValue(ptr->data);
-//
-//	ptr=ptr->link;
-//      }
-//    }
-//  }
-//}
+void traverse(){
+  if(isEmpty()){
+    listEmpty();
+    return;
+  }
+
+  else if(headPtr->link==NULL){
+    showValue(headPtr->data);
+    return;
+  }
+
+  else{
+    LIST* ptr=headPtr;
+
+    while(ptr!=NULL){
+      if(ptr->link==NULL){
+	showValue(ptr->data);
+
+	return;
+      }
+
+      else{
+	showValue(ptr->data);
+
+	ptr=ptr->link;
+      }
+    }
+  }
+}
 
 bool findByKey(int key){
   if(isEmpty()){ return false; }
