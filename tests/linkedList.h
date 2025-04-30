@@ -116,7 +116,7 @@ int deleteFront(){
 
     if(ptr->link==NULL){
 
-      char temp=ptr->data;
+      int temp=ptr->data;
 
       headPtr=NULL;
       free(ptr);
@@ -125,7 +125,7 @@ int deleteFront(){
     }
 
     else{
-      char temp=ptr->data;
+      int temp=ptr->data;
 
       headPtr=ptr->link;
       free(ptr);
